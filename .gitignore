@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+
+# Virtual env
+venv/
+env/
+.venv/
+ENV/
+
+# Jupyter notebooks
+.ipynb_checkpoints
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model files (large)
+*.bin
+*.pt
+*.ckpt
+*.onnx
