@@ -3,3 +3,5 @@ transformers
 torch
 sentencepiece
 soundfile
+openai-whisper
+gTTS

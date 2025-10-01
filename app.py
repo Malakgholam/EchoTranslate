@@ -3,9 +3,8 @@ import whisper
 from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer
 from gtts import gTTS
 
-# --------------------------
-# 1️⃣ Load Models
-# --------------------------
+
+#Load Models
 print("Loading Whisper model...")
 whisper_model = whisper.load_model("base")
 
@@ -14,9 +13,8 @@ m2m_model_name = "facebook/m2m100_418M"
 m2m_tokenizer = M2M100Tokenizer.from_pretrained(m2m_model_name)
 m2m_model = M2M100ForConditionalGeneration.from_pretrained(m2m_model_name)
 
-# --------------------------
-# 2️⃣ Translation Function
-# --------------------------
+
+# Translation Function
 def translate_text(text, src_lang, tgt_lang):
     m2m_tokenizer.src_lang = src_lang
     encoded = m2m_tokenizer(text, return_tensors="pt")
@@ -26,9 +24,9 @@ def translate_text(text, src_lang, tgt_lang):
     )
     return m2m_tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
 
-# --------------------------
-# 3️⃣ Main Pipeline
-# --------------------------
+
+# Main Pipeline
+
 def transcribe_and_translate(audio, src_lang, tgt_lang):
     if audio is None:
         return None, "No audio provided", None, "No text"
@@ -46,9 +44,9 @@ def transcribe_and_translate(audio, src_lang, tgt_lang):
 
     return audio, original_text, "translated_audio.mp3", translated_text
 
-# --------------------------
-# 4️⃣ Gradio UI
-# --------------------------
+
+# Gradio UI
+
 with gr.Blocks() as demo:
     gr.Markdown("# 🌍 EchoTranslate")
     gr.Markdown("🎤 Speak → 📝 Transcribe → 🌎 Translate → 🔊 Listen")
@@ -82,8 +80,7 @@ with gr.Blocks() as demo:
         outputs=[audio_in, original_text_out, translated_audio_out, translated_text_out]
     )
 
-# --------------------------
-# 5️⃣ Launch App
-# --------------------------
+# Launch App
+
 if __name__ == "__main__":
     demo.launch()
